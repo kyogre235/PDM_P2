@@ -1,9 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Tema base de la aplicación. -->
     <style name="Base.Theme.Pokedex" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Personaliza tu tema claro aquí. -->
-        <item name="colorPrimary">@color/red</item>
+        <!-- Personaliza tu tema oscuro aquí. -->
+        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
-
-    <style name="Theme.Pokedex" parent="Base.Theme.Pokedex" />
 </resources>
