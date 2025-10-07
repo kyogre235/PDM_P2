@@ -5,8 +5,6 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/FirstFragment">
 
-<!-- para cambiar a la otra vista debemos cambiar esta linea por la de arriba: app:startDestination="@id/PokemonDetailFragment"> -->
-
     <fragment
         android:id="@+id/FirstFragment"
         android:name="com.example.pokedex.FirstFragment"
@@ -14,18 +12,8 @@
         tools:layout="@layout/fragment_first">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.pokedex.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_FirstFragment_to_PokemonDetailFragment"
+            app:destination="@id/PokemonDetailFragment" />
     </fragment>
 
     <fragment
