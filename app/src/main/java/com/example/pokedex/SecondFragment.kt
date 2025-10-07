@@ -14,9 +14,7 @@ import com.example.pokedex.databinding.FragmentSecondBinding
 class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
-
-    // Esta propiedad solo es válida entre onCreateView y
-    // onDestroyView.
+    
     private val binding get() = _binding!!
 
     override fun onCreateView(

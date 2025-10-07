@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/PokemonDetailFragment">
-<!-- El destino de inicio original era: app:startDestination="@id/FirstFragment" -->
+    app:startDestination="@id/FirstFragment">
+
+<!-- para cambiar a la otra vista debemos cambiar esta linea por la de arriba: app:startDestination="@id/PokemonDetailFragment"> -->
 
     <fragment
         android:id="@+id/FirstFragment"
