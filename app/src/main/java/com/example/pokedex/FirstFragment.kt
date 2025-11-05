@@ -42,9 +42,10 @@ class FirstFragment : Fragment() {
         binding.pokemonRecyclerview.layoutManager = LinearLayoutManager(context)
         binding.pokemonRecyclerview.adapter = pokemonAdapter
     }
+
     /*
-    * carga los datos de los pokemon desde la clase PokeApi,
-    * como las peticiones no son inmediatas, pone el circulo de cargando
+    * Carga los datos de los pokemon desde la clase PokeApi,
+    * como las peticiones no son inmediatas, pone el círculo de cargando
     * hasta que tenga todas las peticiones
     * */
     private fun loadPokemonData() {
@@ -56,8 +57,9 @@ class FirstFragment : Fragment() {
             showLoading(false)
         }
     }
+
     /*
-    * con esta funcion determinamos si se muestra el circulo de cargando o no
+    * Con esta función determinamos si se muestra el círculo de cargando o no
     * */
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
