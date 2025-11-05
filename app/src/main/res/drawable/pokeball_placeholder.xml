@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+
+    <!-- Fondo gris claro -->
+    <path
+        android:fillColor="#E0E0E0"
+        android:pathData="M48,48m-48,0a48,48 0,1 1,96 0a48,48 0,1 1,-96 0"/>
+
+    <!-- Mitad superior roja -->
+    <path
+        android:fillColor="#EE1515"
+        android:strokeWidth="10"
+        android:strokeLineCap="round"
+        android:pathData="M0,48A48,48 0 0,1 96,48" />
+
+    <!-- Mitad inferior blanca -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M6.4,58A48,48 0 0,0 89.6,58Z"/>
+
+    <!-- Línea central negra -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M0,44h96v8H0z"/>
+
+    <!-- Círculo central blanco -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M48,48m-12,0a12,12 0,1 1,24 0a12,12 0,1 1,-24 0"/>
+
+    <!-- Borde del círculo central -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M48,48m-10,0a10,10 0,1 1,20 0a10,10 0,1 1,-20 0"/>
+
+    <!-- Círculo interno blanco -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M48,48m-6,0a6,6 0,1 1,12 0a6,6 0,1 1,-12 0"/>
+</vector>

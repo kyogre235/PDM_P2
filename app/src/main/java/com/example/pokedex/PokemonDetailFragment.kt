@@ -1,10 +1,13 @@
 package com.example.pokedex
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.navArgs
 import coil.load
 import com.example.pokedex.databinding.FragmentPokemonDetailBinding
@@ -30,13 +33,11 @@ class PokemonDetailFragment : Fragment() {
 
         val pokemon = args.pokemon
 
-        /*
-        * ahora cargamos la imagen del pokemon con la libreria coil
-        * */
+        // Cargar imagen con placeholder de Pokéball
         binding.detailPokemonImage.load(pokemon.spriteUrl) {
             crossfade(true)
-            placeholder(R.drawable.ic_launcher_background)
-            error(R.drawable.ic_launcher_background)
+            placeholder(R.drawable.pokeball_placeholder)
+            error(R.drawable.pokeball_placeholder)
         }
 
         // Actualizar la UI con los datos generales
@@ -44,7 +45,7 @@ class PokemonDetailFragment : Fragment() {
         binding.detailPokemonName.text = pokemon.name
         binding.pokedexDescriptionText.text = pokemon.pokedexDescription
 
-        // Limpiar el contenedor de habilidades por si acaso
+        // Limpiar el contenedor de habilidades
         binding.abilitiesContainer.removeAllViews()
 
         // Crear y añadir las vistas de habilidad dinámicamente
@@ -60,31 +61,33 @@ class PokemonDetailFragment : Fragment() {
             binding.abilitiesContainer.addView(abilityBinding.root)
         }
 
-        // Rellenar todas las estadísticas
+        // Rellenar estadísticas con colores
         pokemon.stats["HP"]?.let {
-            binding.statHpBar.progress = it
-            binding.statHpValue.text = it.toString()
+            setStatBar(binding.statHpBar, binding.statHpValue, it, R.color.stat_hp)
         }
         pokemon.stats["Ataque"]?.let {
-            binding.statAttackBar.progress = it
-            binding.statAttackValue.text = it.toString()
+            setStatBar(binding.statAttackBar, binding.statAttackValue, it, R.color.stat_attack)
         }
         pokemon.stats["Defensa"]?.let {
-            binding.statDefenseBar.progress = it
-            binding.statDefenseValue.text = it.toString()
+            setStatBar(binding.statDefenseBar, binding.statDefenseValue, it, R.color.stat_defense)
         }
         pokemon.stats["Sp. Atk"]?.let {
-            binding.statSpAtkBar.progress = it
-            binding.statSpAtkValue.text = it.toString()
+            setStatBar(binding.statSpAtkBar, binding.statSpAtkValue, it, R.color.stat_sp_atk)
         }
         pokemon.stats["Sp. Def"]?.let {
-            binding.statSpDefBar.progress = it
-            binding.statSpDefValue.text = it.toString()
+            setStatBar(binding.statSpDefBar, binding.statSpDefValue, it, R.color.stat_sp_def)
         }
         pokemon.stats["Velocidad"]?.let {
-            binding.statSpeedBar.progress = it
-            binding.statSpeedValue.text = it.toString()
+            setStatBar(binding.statSpeedBar, binding.statSpeedValue, it, R.color.stat_speed)
         }
+    }
+
+    private fun setStatBar(progressBar: ProgressBar, valueView: android.widget.TextView, value: Int, colorRes: Int) {
+        progressBar.progress = value
+        valueView.text = value.toString()
+
+        val color = ContextCompat.getColor(requireContext(), colorRes)
+        progressBar.progressTintList = ColorStateList.valueOf(color)
     }
 
     override fun onDestroyView() {
