@@ -7,23 +7,51 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.pokedex.FirstFragment"
+        android:name="com.example.pokedex.ui.pokedex.FirstFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
         <action
             android:id="@+id/action_FirstFragment_to_PokemonDetailFragment"
             app:destination="@id/PokemonDetailFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_SettingsFragment"
+            app:destination="@id/SettingsFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/PokemonDetailFragment"
-        android:name="com.example.pokedex.PokemonDetailFragment"
+        android:name="com.example.pokedex.ui.pokedex.PokemonDetailFragment"
         android:label="Detalles del Pokémon"
         tools:layout="@layout/fragment_pokemon_detail">
         <argument
             android:name="pokemon"
-            app:argType="com.example.pokedex.Pokemon" />
+            app:argType="com.example.pokedex.model.Pokemon" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/SettingsFragment"
+        android:name="com.example.pokedex.settings.SettingsFragment"
+        android:label="Configuración" />
+
+    <fragment
+        android:id="@+id/ItemListFragment"
+        android:name="com.example.pokedex.ui.item.ItemListFragment"
+        android:label="Objetos"
+        tools:layout="@layout/fragment_item_list">
+        <action
+            android:id="@+id/action_ItemListFragment_to_ItemDetailFragment"
+            app:destination="@id/ItemDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ItemDetailFragment"
+        android:name="com.example.pokedex.ui.item.ItemDetailFragment"
+        android:label="Detalles del Objeto"
+        tools:layout="@layout/fragment_item_detail">
+        <argument
+            android:name="item"
+            app:argType="com.example.pokedex.model.Item" />
     </fragment>
 
 </navigation>

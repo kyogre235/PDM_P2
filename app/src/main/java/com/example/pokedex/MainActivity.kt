@@ -1,16 +1,17 @@
 package com.example.pokedex
 
+import android.content.SharedPreferences
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.GravityCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.view.GravityCompat
+import androidx.preference.PreferenceManager
 import com.example.pokedex.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
 
@@ -18,6 +19,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var sharedPreferences: SharedPreferences
+
+    private val themeChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
+        if (key == "dark_mode") {
+            applyTheme()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,17 +36,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setSupportActionBar(binding.toolbar)
         supportActionBar?.title = "Pokedex"
 
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        sharedPreferences.registerOnSharedPreferenceChangeListener(themeChangeListener)
+        applyTheme()
+
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        // Configura correctamente AppBarConfiguration con el grafo de navegación y el DrawerLayout
-        appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout)
+        appBarConfiguration = AppBarConfiguration(setOf(R.id.FirstFragment, R.id.ItemListFragment), binding.drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         binding.navView.setNavigationItemSelectedListener(this)
+    }
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null)
-                .setAnchorView(R.id.fab).show()
+    private fun applyTheme() {
+        val darkMode = sharedPreferences.getBoolean("dark_mode", false)
+        if (darkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }
 
@@ -48,9 +62,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Maneja las pulsaciones en los elementos de la barra de acción
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_settings -> {
+                findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.SettingsFragment)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -69,9 +85,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Maneja los clics en los elementos de la vista de navegación aquí.
-        // Nota: Necesitarás implementar la lógica de navegación para tus placeholders.
+        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        when (item.itemId) {
+            R.id.nav_pokedex -> navController.navigate(R.id.FirstFragment)
+            R.id.nav_items -> navController.navigate(R.id.ItemListFragment)
+        }
         binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        sharedPreferences.unregisterOnSharedPreferenceChangeListener(themeChangeListener)
     }
 }

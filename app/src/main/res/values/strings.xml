@@ -9,4 +9,5 @@
     <string name="first_fragment_label">Pokedex</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="pokemon_image_content_description">Image of the Pokemon</string>
+    <string name="search_title">Search</string>
 </resources>

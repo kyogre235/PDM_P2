@@ -5,10 +5,12 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_placeholder_1"
-            android:title="Placeholder 1" />
+            android:id="@+id/nav_pokedex"
+            android:icon="@drawable/ic_pokemon_logo"
+            android:title="Pokédex" />
         <item
-            android:id="@+id/nav_placeholder_2"
-            android:title="Placeholder 2" />
+            android:id="@+id/nav_items"
+            android:icon="@drawable/ic_items_bag"
+            android:title="Objetos" />
     </group>
 </menu>

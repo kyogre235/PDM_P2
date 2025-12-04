@@ -1,32 +1,15 @@
-package com.example.pokedex
+package com.example.pokedex.adapter
 
 import android.graphics.drawable.GradientDrawable
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.pokedex.R
 import com.example.pokedex.databinding.PokemonItemBinding
-import kotlinx.parcelize.Parcelize
-
-// Nuevo modelo para una habilidad
-@Parcelize
-data class Ability(val name: String, val isHidden: Boolean) : Parcelable
-
-//modelo de datos de los pokemon
-@Parcelize
-data class Pokemon(
-    val number: Int,
-    val name: String,
-    val spriteUrl: String,
-    val type1: String,
-    val type2: String? = null,
-    val pokedexDescription: String,
-    val abilities: List<Ability>,
-    val stats: Map<String, Int>
-) : Parcelable
+import com.example.pokedex.model.Pokemon
 
 class PokemonAdapter(
     private var pokemonList: List<Pokemon>,

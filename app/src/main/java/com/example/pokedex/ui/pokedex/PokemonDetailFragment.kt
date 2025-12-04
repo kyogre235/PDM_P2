@@ -1,17 +1,19 @@
-package com.example.pokedex
+package com.example.pokedex.ui.pokedex
 
 import android.content.res.ColorStateList
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import coil.load
+import com.example.pokedex.R
 import com.example.pokedex.databinding.FragmentPokemonDetailBinding
 import com.example.pokedex.databinding.AbilityItemBinding
+import com.example.pokedex.model.Pokemon
 
 class PokemonDetailFragment : Fragment() {
 
@@ -33,22 +35,18 @@ class PokemonDetailFragment : Fragment() {
 
         val pokemon = args.pokemon
 
-        // Cargar imagen con placeholder de Pokéball
         binding.detailPokemonImage.load(pokemon.spriteUrl) {
             crossfade(true)
             placeholder(R.drawable.pokeball_placeholder)
             error(R.drawable.pokeball_placeholder)
         }
 
-        // Actualizar la UI con los datos generales
         binding.detailPokemonNumber.text = "#${pokemon.number.toString().padStart(3, '0')}"
         binding.detailPokemonName.text = pokemon.name
         binding.pokedexDescriptionText.text = pokemon.pokedexDescription
 
-        // Limpiar el contenedor de habilidades
         binding.abilitiesContainer.removeAllViews()
 
-        // Crear y añadir las vistas de habilidad dinámicamente
         val inflater = LayoutInflater.from(context)
         pokemon.abilities.forEach { ability ->
             val abilityBinding = AbilityItemBinding.inflate(inflater, binding.abilitiesContainer, false)
@@ -61,7 +59,6 @@ class PokemonDetailFragment : Fragment() {
             binding.abilitiesContainer.addView(abilityBinding.root)
         }
 
-        // Rellenar estadísticas con colores
         pokemon.stats["HP"]?.let {
             setStatBar(binding.statHpBar, binding.statHpValue, it, R.color.stat_hp)
         }
